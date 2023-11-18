@@ -1,32 +1,35 @@
 package com.fuctura.bibliotecaSab.model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Categoria {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String nome;
     private String descricao;
 
+    @OneToMany(mappedBy = "categoria")
     private List<Livro> livros = new ArrayList<>();
 
     public Categoria() {
-
     }
 
-    public Categoria(int id, String nome, String descricao, List<Livro> livros) {
+    public Categoria(Integer id, String nome, String descricao) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.livros = livros;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

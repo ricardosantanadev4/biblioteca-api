@@ -1,30 +1,42 @@
 package com.fuctura.bibliotecaSab.model;
 
+import com.fuctura.bibliotecaSab.enums.Tamanho;
+
+import javax.persistence.*;
+
+@Entity
 public class Livro {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String titulo;
     private String nome_autor;
     private String texto;
 
+    private Tamanho tamanho;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     public Livro() {
     }
 
-    public Livro(int id, String titulo, String nome_autor, String texto, Categoria categoria) {
+    public Livro(Integer id, String titulo, String nome_autor, String texto, Tamanho tamanho, Categoria categoria) {
         this.id = id;
         this.titulo = titulo;
         this.nome_autor = nome_autor;
         this.texto = texto;
+        this.tamanho = tamanho;
         this.categoria = categoria;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -50,6 +62,14 @@ public class Livro {
 
     public void setTexto(String texto) {
         this.texto = texto;
+    }
+
+    public Tamanho getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(Tamanho tamanho) {
+        this.tamanho = tamanho;
     }
 
     public Categoria getCategoria() {
