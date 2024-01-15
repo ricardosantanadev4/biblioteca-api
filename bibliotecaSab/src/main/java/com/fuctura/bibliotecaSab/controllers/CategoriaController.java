@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,10 +42,22 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoriaDTO> save(@RequestBody CategoriaDTO categoriaDTO) {
+    public ResponseEntity<CategoriaDTO> save(@Valid @RequestBody CategoriaDTO categoriaDTO) {
         Categoria cat = categoriaService.save(categoriaDTO);
         return ResponseEntity.ok().body(modelMapper.map(cat, CategoriaDTO.class));
+    }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoriaDTO> upDate(@PathVariable Integer id,@Valid @RequestBody CategoriaDTO categoriaDTO) {
+        categoriaDTO.setId(id);
+        Categoria cat = categoriaService.upDate(categoriaDTO);
+        return ResponseEntity.ok().body(modelMapper.map(cat, CategoriaDTO.class));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        categoriaService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

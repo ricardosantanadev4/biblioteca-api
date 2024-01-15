@@ -1,11 +1,23 @@
 package com.fuctura.bibliotecaSab.dtos;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
 public class CategoriaDTO {
 
     private Integer id;
-    private String nome;
-    private String descricao;
 
+    @NotEmpty(message = "O campo NOME é requerido")
+    @Length(min = 5, max = 50, message = "O campo NOME deve conter entre 5 e 50 caracteres")
+    private String nome;
+
+    @NotEmpty(message = "O campo DESCRIÇÃO é requerido")
+    @Length(min = 50, max = 200, message = "O campo DESCRIÇÃO deve conter entre 50 e 200 caracteres")
+    private String descricao;
 
     public CategoriaDTO() {
     }

@@ -1,6 +1,7 @@
 package com.fuctura.bibliotecaSab.services;
 
 import com.fuctura.bibliotecaSab.dtos.CategoriaDTO;
+import com.fuctura.bibliotecaSab.exceptions.DataIntegrityViolationException;
 import com.fuctura.bibliotecaSab.exceptions.IllegalArgumentException;
 import com.fuctura.bibliotecaSab.exceptions.ObjectNotFoundException;
 import com.fuctura.bibliotecaSab.model.Categoria;
@@ -38,6 +39,20 @@ public class CategoriaService {
         findByNome(objDTO);
         objDTO.setId(null);
         return categoriaRepository.save(modelMapper.map(objDTO, Categoria.class));
+    }
+
+    public Categoria upDate(CategoriaDTO categoriaDTO) {
+        findById(categoriaDTO.getId());
+        return categoriaRepository.save(modelMapper.map(categoriaDTO, Categoria.class));
+    }
+
+    public void delete(Integer id) {
+        findById(id);
+        Optional<Categoria> cat = categoriaRepository.findById(id);
+        if (cat.get().getLivros().size() > 0) {
+            throw new DataIntegrityViolationException("Categoria possui livros, não pode ser deletada!");
+        }
+        categoriaRepository.deleteById(id);
     }
 
     private void findByNome(CategoriaDTO categoriaDTO) {
