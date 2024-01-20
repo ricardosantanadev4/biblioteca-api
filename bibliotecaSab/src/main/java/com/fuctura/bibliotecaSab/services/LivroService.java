@@ -1,12 +1,12 @@
 package com.fuctura.bibliotecaSab.services;
-
+import com.fuctura.bibliotecaSab.dtos.LivroDTO;
 import com.fuctura.bibliotecaSab.exceptions.ObjectNotFoundException;
-import com.fuctura.bibliotecaSab.model.Livro;
+import com.fuctura.bibliotecaSab.models.Categoria;
+import com.fuctura.bibliotecaSab.models.Livro;
 import com.fuctura.bibliotecaSab.repositories.CategoriaRepository;
 import com.fuctura.bibliotecaSab.repositories.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,5 +31,32 @@ public class LivroService {
     public List<Livro> findAll(Integer id_cat) {
         categoriaService.findById(id_cat);
         return livroRepository.findAllByCategoria(id_cat);
+    }
+
+    public List<Livro> findAllLivroByCategoriaName(String nome) {
+        categoriaService.buscarPorNome(nome);
+        return livroRepository.findByCategoriaNomeContainingIgnoreCase(nome);
+    }
+
+    public Livro save(Integer id_cat, LivroDTO livroDTO) {
+        livroDTO.setId(null);
+        Categoria cat = categoriaService.findById(id_cat);
+        livroDTO.setCategoria(cat);
+        return livroRepository.save(new Livro(livroDTO));
+    }
+
+    public Livro upDate(Integer id, LivroDTO livroDTO) {
+        Livro livro = findById(id);
+        livroDTO.setId(id);
+        upDateDados(livro, livroDTO);
+        return livroRepository.save(livro);
+    }
+
+    private void upDateDados(Livro livro, LivroDTO livroDTO) {
+        livro.setTitulo(livroDTO.getTitulo());
+        livro.setNome_autor(livroDTO.getNome_autor());
+        livro.setTexto(livroDTO.getTexto());
+        livro.setTamanho(livroDTO.getTamanho());
+        livro.setCategoria(livroDTO.getCategoria());
     }
 }

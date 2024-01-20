@@ -4,7 +4,7 @@ import com.fuctura.bibliotecaSab.dtos.CategoriaDTO;
 import com.fuctura.bibliotecaSab.exceptions.DataIntegrityViolationException;
 import com.fuctura.bibliotecaSab.exceptions.IllegalArgumentException;
 import com.fuctura.bibliotecaSab.exceptions.ObjectNotFoundException;
-import com.fuctura.bibliotecaSab.model.Categoria;
+import com.fuctura.bibliotecaSab.models.Categoria;
 import com.fuctura.bibliotecaSab.repositories.CategoriaRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,4 +61,12 @@ public class CategoriaService {
             throw new IllegalArgumentException("Já existe uma categoria com este nome " + categoriaDTO.getNome());
         }
     }
+
+    public void buscarPorNome(String nome) {
+        Optional<Categoria> cat = categoriaRepository.findByNomeContainingIgnoreCase(nome);
+        if (cat.isEmpty()) {
+            throw new ObjectNotFoundException("Categoria não encontrada!");
+        }
+    }
+
 }

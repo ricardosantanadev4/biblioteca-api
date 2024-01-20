@@ -1,7 +1,7 @@
 package com.fuctura.bibliotecaSab.controllers;
 
 import com.fuctura.bibliotecaSab.dtos.CategoriaDTO;
-import com.fuctura.bibliotecaSab.model.Categoria;
+import com.fuctura.bibliotecaSab.models.Categoria;
 import com.fuctura.bibliotecaSab.services.CategoriaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

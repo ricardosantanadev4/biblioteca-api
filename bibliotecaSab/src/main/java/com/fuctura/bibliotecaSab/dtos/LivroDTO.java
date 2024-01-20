@@ -1,12 +1,10 @@
 package com.fuctura.bibliotecaSab.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fuctura.bibliotecaSab.enums.Tamanho;
-import com.fuctura.bibliotecaSab.model.Categoria;
-import com.fuctura.bibliotecaSab.model.Livro;
+import com.fuctura.bibliotecaSab.models.Categoria;
+import com.fuctura.bibliotecaSab.models.Livro;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 public class LivroDTO {
@@ -21,6 +19,7 @@ public class LivroDTO {
 
     @NotEmpty(message = "O campo TEXTO é requerido")
     private String texto;
+
     private Tamanho tamanho;
     private Categoria categoria;
 

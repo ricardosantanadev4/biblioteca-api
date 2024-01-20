@@ -1,8 +1,8 @@
 package com.fuctura.bibliotecaSab.services;
 
 import com.fuctura.bibliotecaSab.enums.Tamanho;
-import com.fuctura.bibliotecaSab.model.Categoria;
-import com.fuctura.bibliotecaSab.model.Livro;
+import com.fuctura.bibliotecaSab.models.Categoria;
+import com.fuctura.bibliotecaSab.models.Livro;
 import com.fuctura.bibliotecaSab.repositories.CategoriaRepository;
 import com.fuctura.bibliotecaSab.repositories.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;

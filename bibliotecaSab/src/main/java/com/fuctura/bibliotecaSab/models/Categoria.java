@@ -1,4 +1,4 @@
-package com.fuctura.bibliotecaSab.model;
+package com.fuctura.bibliotecaSab.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
