@@ -50,4 +50,10 @@ public class LivroController {
         return ResponseEntity.ok().body(new LivroDTO(livro));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        livroService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

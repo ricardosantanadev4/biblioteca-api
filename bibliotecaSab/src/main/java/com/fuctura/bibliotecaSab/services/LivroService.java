@@ -52,6 +52,11 @@ public class LivroService {
         return livroRepository.save(livro);
     }
 
+    public void delete(Integer id) {
+        findById(id);
+        livroRepository.deleteById(id);
+    }
+
     private void upDateDados(Livro livro, LivroDTO livroDTO) {
         livro.setTitulo(livroDTO.getTitulo());
         livro.setNome_autor(livroDTO.getNome_autor());
